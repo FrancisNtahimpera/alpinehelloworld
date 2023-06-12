@@ -1,0 +1,26 @@
+stages:
+  - Build image
+  - Test acceptation
+
+build:
+  # Use the official docker image.
+  image: docker:latest
+  stage: Build image
+  services:
+    - docker:dind
+  script:
+    - docker build -t alpinehelloworld .
+    - docker save alpinehelloworld > alpinehelloworld.tar
+  artifacts:
+    paths: 
+      - alpinehelloworld.tar
+
+test acceptation:
+  # Use the official docker image.
+  image: docker:latest
+  stage: Test acceptation
+  services:
+    - docker:dind
+  script:
+    - docker load < alpinehelloworld.tar
+    - docker run -d --name webapp alpinehelloworld.tar
