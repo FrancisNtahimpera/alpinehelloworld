@@ -5,7 +5,7 @@ stages:
 build:
   # Use the official docker image.
   image: docker:latest
-  stage: build image
+  stage: Build image
   services:
     - docker:dind
   script:
@@ -14,7 +14,7 @@ build:
 test acceptation:
   # Use the official docker image.
   image: docker:latest
-  stage: test acceptation
+  stage: Test acceptation
   services:
     - docker:dind
   script:
